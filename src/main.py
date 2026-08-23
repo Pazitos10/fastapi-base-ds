@@ -13,6 +13,7 @@ from src.logger import setup_logging
 from src.personas.router import router as personas_router
 from src.mascotas.router import router as mascotas_router
 from src.profesores.router import router as profesores_router
+from src.departamentos.router import router as departamentos_router
 from fastapi.middleware.cors import CORSMiddleware
 
 ENV = settings.ENV.upper()
@@ -45,3 +46,4 @@ app.add_middleware(
 app.include_router(personas_router)
 app.include_router(mascotas_router)
 app.include_router(profesores_router)
+app.include_router(departamentos_router)

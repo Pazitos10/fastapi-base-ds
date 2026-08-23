@@ -9,15 +9,16 @@ class ProfesorBase(BaseModel):
 
 
 class ProfesorCreate(ProfesorBase):
-    pass
+    departamento_id: int
 
 
 class ProfesorUpdate(ProfesorBase):
-    pass
+    departamento_id: int
 
 
 class Profesor(ProfesorBase):
     id: int
+    departamento_id: int
 
     model_config = ConfigDict(from_attributes=True)
 
