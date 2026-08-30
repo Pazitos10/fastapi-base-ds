@@ -10,9 +10,27 @@ from src.config import settings
 from src.logger import setup_logging
 
 # Importamos los routers desde nuestros modulos
-from src.personas.router import router as personas_router
-from src.mascotas.router import router as mascotas_router
+from src.departamento.router import router as departamento_router
+from src.curso.router import router as curso_router
+from src.profesor.router import router as profesor_router
+from src.clase.router import router as clase_router
+from src.estudiante.router import router as estudiante_router
+from src.inscripcion.router import router as inscripcion_router
 from fastapi.middleware.cors import CORSMiddleware
+
+# Rebuild schemas to resolve forward references after all imports
+from src.profesor.schemas import Profesor, Curso
+from src.departamento.schemas import Departamento
+from src.estudiante.schemas import Estudiante
+from src.inscripcion.schemas import Inscripcion
+from src.clase.schemas import Clase
+
+Profesor.model_rebuild()
+Departamento.model_rebuild()
+Curso.model_rebuild()
+Estudiante.model_rebuild()
+Inscripcion.model_rebuild()
+Clase.model_rebuild()
 
 ENV = settings.ENV.upper()
 ROOT_PATH = getattr(settings, f"ROOT_PATH_{ENV}", "")
@@ -41,5 +59,9 @@ app.add_middleware(
 
 
 # asociamos los routers a nuestra app
-app.include_router(personas_router)
-app.include_router(mascotas_router)
+app.include_router(departamento_router)
+app.include_router(curso_router)
+app.include_router(profesor_router)
+app.include_router(clase_router)
+app.include_router(estudiante_router)
+app.include_router(inscripcion_router)
